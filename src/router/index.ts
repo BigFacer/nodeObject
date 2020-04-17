@@ -1,24 +1,36 @@
 import Vue from 'vue'
 import VueRouter, { RouteConfig } from 'vue-router'
 // import Home from '../views/Home.vue'
-import Home from '@/components/pages/Home.vue'
-import Blog from '@/components/pages/Blog.vue'
+import Login from '@/views/login/login.vue'
+import Admin from '@/views/AdminModules/index.vue'
+import Articles from '@/views/AdminModules/child/publishArticles'
+import GuestBook from '@/views/AdminModules/child/guestBook'
 
-Vue.use(VueRouter)
+Vue.use(VueRouter);
 
   const routes: Array<RouteConfig> = [
   {
     path: '/',
-    name: 'Home',
-    component: Home
+    name: 'Login',
+    component: Login
   },
   {
-    path: '/about',
-    name: 'Blog',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: Blog
+    path: '/admin',
+    name: 'Admin',
+    component: Admin,
+    redirect: '/Admin/Articles',
+      children: [
+          {
+              path: 'Articles',
+              name: 'Articles',
+              component: Articles
+          },
+          {
+              path: 'GuestBook',
+              name: 'GuestBook',
+              component: GuestBook
+          }
+      ]
   }
 ]
 
