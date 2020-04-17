@@ -3,8 +3,8 @@ import VueRouter, { RouteConfig } from 'vue-router'
 // import Home from '../views/Home.vue'
 import Login from '@/views/login/login.vue'
 import Admin from '@/views/AdminModules/index.vue'
-import Articles from '@/views/AdminModules/child/publishArticles'
-import GuestBook from '@/views/AdminModules/child/guestBook'
+import Articles from '@/views/AdminModules/child/publishArticles.vue'
+import GuestBook from '@/views/AdminModules/child/guestBook.vue'
 
 Vue.use(VueRouter);
 
