@@ -17,7 +17,7 @@
                         <i class="el-icon-key el-icon"></i>
                     </el-col>
                     <el-col :span="22">
-                        <input class="name-input" type="password" v-model="passworld">
+                        <input class="name-input" type="password" v-model="password">
                     </el-col>
                 </el-row>
                 <p class="bottom-fline "></p>
@@ -37,13 +37,33 @@
         data () {
             return {
                 username: '',
-                passworld: ''
+                password: ''
             }
         },
         methods: {
+            error(data) {
+                this.$message.error(data);
+            },
             Login () {
-                this.$router.push('/Admin')
+                this.$http({
+                    url:'/api/login',
+                    method:'GET',
+                    params:{
+                      PersonName: this.username,
+                      PersonPassword: this.password
+                    }
+                }).then( (res) => {
+                    if(res.data.isSuccess){
+                        this.$router.push('/Admin');
+                        this.$store.commit('setValue',res.data.data[0].token);
+                        this.$store.commit('setValue',res.data.data[0]);
+                    }else {
+                        this.error(res.data.errorMessage)
+                    }
+                });
+
             }
         }
+
     }
 </script>

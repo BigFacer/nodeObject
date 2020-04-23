@@ -12,7 +12,20 @@ class Jwt {
         return token
     }
     verifyToken(token) {
-        let payload = jwt.verify(token, 'OurBlog')
+        let payload = jwt.verify(token, 'OurBlog', (err, decode) => {
+            if (err) {
+                switch (err.name) {
+                    case 'JsonWebTokenError':
+                        payload = { code: -1, msg: '无效的token',status: 403};
+                        // res.status(403).send();
+                        break;
+                    case 'TokenExpiredError':
+                        payload = { code: -1, msg: 'token过期',status: 403};
+                        break;
+                }
+            }
+
+        });
         return payload
     }
 }
