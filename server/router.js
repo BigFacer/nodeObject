@@ -8,4 +8,7 @@ router.get('/login', (req, res, next) => {
 router.get('/getTableList', (req, res, next) => {
     API.getTableList(req, res, next)
 });
+router.get('/getencryDate', (req, res, next) => {
+    API.getencryDate(req, res, next)
+});
 module.exports = router

@@ -6,11 +6,13 @@ const jwt = require('./Jwt');
 const moment = require('moment')
 const poor = mysql.createPool(dbconfig.mysql);
 let jwtToken = new jwt;
+const Base64 = require('js-base64').Base64
 let sql = new setMap;
 class api {
     // 登陆
     login(req, res, next) {
-       let sqlA = sql.loginSql(req.query.PersonName, req.query.PersonPassword);
+        let password = Base64.decode(req.query.PersonPassword)
+       let sqlA = sql.loginSql(req.query.PersonName, password);
         poor.getConnection( (err, connection) => {
             if(err) {
                 let errorData = {
@@ -63,9 +65,13 @@ class api {
         })
 
     };
+    //后台token 解码
     getTableList(req, res, next){
         res.json('1111')
         console.log(jwtToken.verifyToken(req.query.token))
+    };
+    getencryDate(req, res, next) {
+        res.json('OurBlog')
     }
 }
 module.exports = api

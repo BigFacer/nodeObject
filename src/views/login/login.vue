@@ -32,25 +32,39 @@
     @import "../../assets/style/login.css";
 </style>
 <script>
+    const  Base64 = require('js-base64').Base64
     export default {
         name: 'Login',
         data () {
             return {
                 username: '',
-                password: ''
+                password: '',
+                encrydate: '',
             }
+        },
+        created() {
+          this.getencryDate()
         },
         methods: {
             error(data) {
                 this.$message.error(data);
             },
+            getencryDate () {
+                this.$http({
+                    url: '/api/getencryDate',
+                    method: 'GET',
+                }).then( (res) => {
+                    this.encrydate = res.data
+                })
+            },
             Login () {
+             let password =   Base64.encode(this.password)
                 this.$http({
                     url:'/api/login',
                     method:'GET',
                     params:{
                       PersonName: this.username,
-                      PersonPassword: this.password
+                      PersonPassword: password
                     }
                 }).then( (res) => {
                     if(res.data.isSuccess){
