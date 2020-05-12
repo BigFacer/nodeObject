@@ -168,6 +168,9 @@ export default {
         label: '北京烤鸭'
       }]
     }
-  }
+  },
+    method: {
+
+    }
 }
 </script>

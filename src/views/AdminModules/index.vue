@@ -139,6 +139,9 @@
 <script>
     export default {
         name: 'Admin',
+        created() {
+          this.getArticlList()
+        },
         methods: {
             handleOpen (key, keyPath) {
                 console.log(key, keyPath)
@@ -147,17 +150,29 @@
                 console.log(key, keyPath)
             },
             exit () {
-                this.$router.push('/')
+                sessionStorage.clear();
+                this.$router.push('/');
             },
             AX () {
                 this.$http({
                     url: '/api/getTableList',
                     method: 'GET',
                     params:{
-                        token: this.$store.state.token
+                        data: this.$store.state.userinfor
                     }
                 }).then((res) => {
                     console.log(res)
+                })
+            },
+            getArticlList () {
+                this.$http({
+                    url: '/api/getArticlTitle',
+                    method: 'GET',
+                    params:{
+                        data: this.$store.state.userinfor.PersonID
+                    }
+                }).then( (result) => {
+                    console.log(result)
                 })
             }
         }

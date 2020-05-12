@@ -11,4 +11,7 @@ router.get('/getTableList', (req, res, next) => {
 router.get('/getencryDate', (req, res, next) => {
     API.getencryDate(req, res, next)
 });
+router.get('/getArticlTitle', (req, res, next) => {
+    API.getArticlTitle(req, res, next)
+});
 module.exports = router

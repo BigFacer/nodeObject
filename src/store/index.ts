@@ -6,11 +6,15 @@ Vue.use(Vuex)
 export default new Vuex.Store({
   state: {
       token:'',
-      userinfor:[]
+      userinfor:[],
+      csrf: ''
   },
   mutations: {
-    setValue(state, newValue) {
+    setToken(state, newValue) {
       state.token = newValue
+    },
+    setValue(state, newvalue) {
+        state.userinfor = newvalue
     }
   },
   actions: {

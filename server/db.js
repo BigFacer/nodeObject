@@ -5,6 +5,7 @@ module.exports = {
         user: 'root',
         password: 'Yiqinuli2019',
         port: '3306',
-        database: 'user'
+        database: 'user',
+        useConnectionPooling: true //使用连接池
     }
 }

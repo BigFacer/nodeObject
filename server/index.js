@@ -3,8 +3,14 @@ const routerApi = require('./router');
 const bodyParser = require('body-parser');
 const express = require('express');
 const app = express();
+app.use((req, res, next) => {
+    console.log(req.url)
+    next()
+});
 app.use(bodyParser.json());
 // 后端api路由
 app.use('/api', routerApi);
+
+
 app.listen(3001);
 console.log('success listen at port 3001')

@@ -58,23 +58,29 @@
                 })
             },
             Login () {
-             let password =   Base64.encode(this.password)
-                this.$http({
-                    url:'/api/login',
-                    method:'GET',
-                    params:{
-                      PersonName: this.username,
-                      PersonPassword: password
-                    }
-                }).then( (res) => {
-                    if(res.data.isSuccess){
-                        this.$router.push('/Admin');
-                        this.$store.commit('setValue',res.data.data[0].token);
-                        this.$store.commit('setValue',res.data.data[0]);
-                    }else {
-                        this.error(res.data.errorMessage)
-                    }
-                });
+             if(this.username ===''|| this.password === ''){
+                     this.error('请填写用户名和密码')
+             }else{
+                 let password =   Base64.encode(this.password)
+                 this.$http({
+                     url:'/api/login',
+                     method:'GET',
+                     params:{
+                         PersonName: this.username,
+                         PersonPassword: password
+                     }
+                 }).then( (res) => {
+                     if(res.data.isSuccess){
+                         this.$router.push('/Admin');
+                         sessionStorage.setItem('access_token', res.data.data[0].Token)
+                         this.$store.commit('setToken',res.data.data[0].Token);
+                         this.$store.commit('setValue',res.data.data[0]);
+                     }else {
+                         this.error(res.data.errorMessage)
+                     }
+                 });
+             }
+
 
             }
         }
