@@ -3,7 +3,7 @@
         <el-row class="admin-hand-div">
             <el-col :span="4" class="admin-hand-left-div">&nbsp;</el-col>
             <el-col :span="2" class="admin-hand admin-exit"><span @click="exit">退出</span></el-col>
-            <el-col :span="2" class="admin-hand "><span  @click="AX">GRH</span></el-col>
+            <el-col :span="2" class="admin-hand "><span  @click="AX">{{username}}</span></el-col>
         </el-row>
         <el-row class="admin-nav-div">
             <el-col :span="4" class="admin-item-div">
@@ -83,7 +83,7 @@
         float: right;
         text-align: right;
         padding-right: 2rem;
-        padding-top: 1rem;
+        padding-top: 0.7rem;
         /*color: #ffffff;*/
         height: 3rem;
         font-size: 1.2rem;
@@ -139,8 +139,12 @@
 <script>
     export default {
         name: 'Admin',
+        data () {
+          return {
+              username: JSON.parse(sessionStorage.getItem('userinfor')).PersonName
+          }
+        },
         created() {
-          this.getArticlList()
         },
         methods: {
             handleOpen (key, keyPath) {
@@ -162,17 +166,6 @@
                     }
                 }).then((res) => {
                     console.log(res)
-                })
-            },
-            getArticlList () {
-                this.$http({
-                    url: '/api/getArticlTitle',
-                    method: 'GET',
-                    params:{
-                        data: this.$store.state.userinfor.PersonID
-                    }
-                }).then( (result) => {
-                    console.log(result)
                 })
             }
         }

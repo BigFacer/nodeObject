@@ -8,9 +8,9 @@
                <el-select v-model="ArticlesArray.selectOne">
                  <el-option
                    v-for="item in selectOne"
-                   :key="item.value"
-                   :label="item.label"
-                   :value="item.value"
+                   :key="item.ArticlId"
+                   :label="item.ArticlName"
+                   :value="item.ArticlId"
                    class="el-input-div">
                  </el-option>
                </el-select>
@@ -23,9 +23,9 @@
                <el-select v-model="ArticlesArray.selectTwo">
                  <el-option
                    v-for="item in selectTwo"
-                   :key="item.value"
-                   :label="item.label"
-                   :value="item.value"
+                   :key="item.ArticlId"
+                   :label="item.ArticlName"
+                   :value="item.ArticlId"
                    class="el-input-div">
                  </el-option>
                </el-select>
@@ -38,9 +38,9 @@
                <el-select v-model="ArticlesArray.selectThree">
                  <el-option
                    v-for="item in selectThree"
-                   :key="item.value"
-                   :label="item.label"
-                   :value="item.value"
+                   :key="item.ArticlId"
+                   :label="item.ArticlName"
+                   :value="item.ArticlId"
                    class="el-input-div">
                  </el-option>
                </el-select>
@@ -114,63 +114,51 @@
   }
 </style>
 <script>
+    import {getArticlTitle}  from '../../../components/request'
 export default {
   name: 'Articles',
+  created(){
+      getArticlTitle({ParentID : this.$store.state.userinfor.PersonID}).then( (res)=> {
+
+          this.selectOne = res.data.data
+//          console.log(this.selectOne)
+//          console.log(res.data.data)
+      })
+  },
   data () {
     return {
-      ArticlesArray: {},
-      selectOne: [ {
-        value: '选项1',
-        label: '黄金糕'
-      }, {
-        value: '选项2',
-        label: '双皮奶'
-      }, {
-        value: '选项3',
-        label: '蚵仔煎'
-      }, {
-        value: '选项4',
-        label: '龙须面'
-      }, {
-        value: '选项5',
-        label: '北京烤鸭'
-      }],
-      selectTwo: [ {
-        value: '选项1',
-        label: '黄金糕'
-      }, {
-        value: '选项2',
-        label: '双皮奶'
-      }, {
-        value: '选项3',
-        label: '蚵仔煎'
-      }, {
-        value: '选项4',
-        label: '龙须面'
-      }, {
-        value: '选项5',
-        label: '北京烤鸭'
-      }],
-      selectThree: [ {
-        value: '选项1',
-        label: '黄金糕'
-      }, {
-        value: '选项2',
-        label: '双皮奶'
-      }, {
-        value: '选项3',
-        label: '蚵仔煎'
-      }, {
-        value: '选项4',
-        label: '龙须面'
-      }, {
-        value: '选项5',
-        label: '北京烤鸭'
-      }]
+      ArticlesArray: {
+          selectOne:'',
+          selectTwo:'',
+          selectThree:'',
+
+      },
+      selectOne: [],
+      selectTwo: [],
+      selectThree: []
     }
   },
-    method: {
+    methods: {},
+    watch: {
+         'ArticlesArray.selectOne' (val, oldVal) {
+             if(val !=oldVal) {
+                 getArticlTitle({ParentID : val}).then((res) => {
+                    this.selectTwo = res.data.data;
+                    this.ArticlesArray.selectTwo = '';
+                    this.ArticlesArray.selectThree = '';
+                    this.selectThree = []
 
+                 })
+             }
+         },
+        'ArticlesArray.selectTwo' (val, oldVal) {
+            if(val !=oldVal) {
+                getArticlTitle({ParentID : val}).then((res) => {
+                    this.selectThree = res.data.data;
+                    this.ArticlesArray.selectThree = ''
+                })
+            }
+        }
     }
 }
 </script>

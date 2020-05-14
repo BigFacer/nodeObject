@@ -72,9 +72,9 @@
                  }).then( (res) => {
                      if(res.data.isSuccess){
                          this.$router.push('/Admin');
-                         sessionStorage.setItem('access_token', res.data.data[0].Token)
+                         sessionStorage.setItem('access_token', res.data.data[0].Token);
                          this.$store.commit('setToken',res.data.data[0].Token);
-                         this.$store.commit('setValue',res.data.data[0]);
+                         sessionStorage.setItem('userinfor', JSON.stringify(res.data.data[0]) );
                      }else {
                          this.error(res.data.errorMessage)
                      }
