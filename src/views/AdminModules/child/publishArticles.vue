@@ -5,7 +5,7 @@
              <el-col :span="6" class="el-col-text">一级标签</el-col>
              <el-col :span="3"> &nbsp;&nbsp; </el-col>
              <el-col :span="15">
-               <el-select v-model="ArticlesArray.selectOne">
+               <el-select v-model="ArticlesArray.SelectOne">
                  <el-option
                    v-for="item in selectOne"
                    :key="item.ArticlId"
@@ -20,7 +20,7 @@
              <el-col :span="6" class="el-col-text">二级标签</el-col>
              <el-col :span="3"> &nbsp;&nbsp; </el-col>
              <el-col :span="15">
-               <el-select v-model="ArticlesArray.selectTwo">
+               <el-select v-model="ArticlesArray.SelectTwo">
                  <el-option
                    v-for="item in selectTwo"
                    :key="item.ArticlId"
@@ -35,7 +35,7 @@
              <el-col :span="6" class="el-col-text">三级标签</el-col>
              <el-col :span="3"> &nbsp;&nbsp; </el-col>
              <el-col :span="15">
-               <el-select v-model="ArticlesArray.selectThree">
+               <el-select v-model="ArticlesArray.SelectThree">
                  <el-option
                    v-for="item in selectThree"
                    :key="item.ArticlId"
@@ -50,15 +50,15 @@
     <el-row class="el-row-div">
       <el-col :span="6" class="el-col-div">
          <el-col :span="6" class="el-col-text">标题</el-col>
-         <el-col :span="15"><el-input v-model="ArticlesArray.bigTitle"></el-input></el-col>
+         <el-col :span="15"><el-input v-model="ArticlesArray.BigTitle"></el-input></el-col>
       </el-col>
       <el-col :span="6" class="el-col-div">
         <el-col :span="6" class="el-col-text">背景描述</el-col>
-        <el-col :span="15"><el-input v-model="ArticlesArray.backgroundText"></el-input></el-col>
+        <el-col :span="15"><el-input v-model="ArticlesArray.BackgroundText"></el-input></el-col>
       </el-col>
       <el-col :span="6" class="el-col-div">
         <el-col :span="6" class="el-col-text">文章标题</el-col>
-        <el-col :span="15"><el-input v-model="ArticlesArray.title"></el-input></el-col>
+        <el-col :span="15"><el-input v-model="ArticlesArray.Title"></el-input></el-col>
       </el-col>
     </el-row>
     <el-row class="el-row-div">
@@ -66,12 +66,12 @@
            <el-col :span="8" class="el-col-text">文章内容:</el-col>
           </el-col>
           <el-col :span="6" class="el-col-div submit ">
-            <el-col :span="8" class="el-col-text"><el-button type="primary" round><i class="el-icon-check"></i>提交</el-button></el-col>
+            <el-col :span="8" class="el-col-text"><el-button type="primary" round  @click=" commit"><i class="el-icon-check"></i>提交</el-button></el-col>
           </el-col>
     </el-row>
     <el-row>
        <el-col :span="21" class="el-col-textarea">
-          <el-input type="textarea" placeholder="请输入内容" v-model="ArticlesArray.articles"></el-input>
+          <el-input type="textarea" placeholder="请输入内容" v-model="ArticlesArray.Article"></el-input>
        </el-col>
     </el-row>
   </div>
@@ -114,23 +114,21 @@
   }
 </style>
 <script>
-    import {getArticlTitle}  from '../../../components/request'
+    import {getArticlTitle, saveArticle}  from '../../../components/request'
 export default {
   name: 'Articles',
   created(){
       getArticlTitle({ParentID : this.$store.state.userinfor.PersonID}).then( (res)=> {
-
-          this.selectOne = res.data.data
-//          console.log(this.selectOne)
-//          console.log(res.data.data)
+          this.selectOne = res.data.data;
+          this.selectThree=[]
       })
   },
   data () {
     return {
       ArticlesArray: {
-          selectOne:'',
-          selectTwo:'',
-          selectThree:'',
+          SelectOne:'',
+          SelectTwo:'',
+          SelectThree:'',
 
       },
       selectOne: [],
@@ -138,24 +136,41 @@ export default {
       selectThree: []
     }
   },
-    methods: {},
+    methods: {
+        commit () {
+            this.ArticlesArray.PersonID  = JSON.parse(sessionStorage.getItem('userinfor') ).PersonID;
+            this.ArticlesArray.PersonName  = JSON.parse(sessionStorage.getItem('userinfor') ).PersonName;
+            saveArticle(this.ArticlesArray).then( (res) => {
+//                if(res.data.isSuccess){
+//                    this.$message({content: res.data})
+//                    this.ArticlesArray = {}
+//                }else{
+//                    this.$message({content: res.data.data})
+//                }
+            })
+        }
+    },
     watch: {
-         'ArticlesArray.selectOne' (val, oldVal) {
+         'ArticlesArray.SelectOne' (val, oldVal) {
              if(val !=oldVal) {
                  getArticlTitle({ParentID : val}).then((res) => {
                     this.selectTwo = res.data.data;
-                    this.ArticlesArray.selectTwo = '';
-                    this.ArticlesArray.selectThree = '';
-                    this.selectThree = []
+                     this.selectThree = []
+                    this.ArticlesArray.SelectTwo = '';
+                    this.ArticlesArray.SelectThree = '';
+
 
                  })
              }
          },
-        'ArticlesArray.selectTwo' (val, oldVal) {
-            if(val !=oldVal) {
+        'ArticlesArray.SelectTwo' (val, oldVal) {
+             if(val == ''){
+                 this.selectThree = []
+                 this.ArticlesArray.SelectThree = ''
+             }else if(val !=oldVal) {
                 getArticlTitle({ParentID : val}).then((res) => {
                     this.selectThree = res.data.data;
-                    this.ArticlesArray.selectThree = ''
+                    this.ArticlesArray.SelectThree = ''
                 })
             }
         }

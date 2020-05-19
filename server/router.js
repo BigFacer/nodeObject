@@ -14,4 +14,7 @@ router.get('/getencryDate', (req, res, next) => {
 router.get('/getArticlTitle', (req, res, next) => {
     API.getArticlTitle(req, res, next)
 });
+router.get('/saveArticle', (req, res, next) => {
+    API.saveArticle(req, res, next)
+});
 module.exports = router

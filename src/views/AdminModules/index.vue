@@ -10,7 +10,7 @@
                 <el-row class="admin-nav">
                     <el-col :span="24">
                         <el-menu
-                                default-active="1"
+                                :default-active="$route.path"
                                 class="el-menu-vertical-demo"
                                 @open="handleOpen"
                                 @close="handleClose"
@@ -18,13 +18,13 @@
                                 background-color="#2f343b"
                                 active-text-color="#ffd04b">
                             <router-link to="/Admin/Articles">
-                                <el-menu-item index="1">
+                                <el-menu-item index="/Admin/Articles">
                                     <i class="el-icon-menu"></i>
                                     <span class="admin-nav-item">发布文章</span>
                                 </el-menu-item>
                             </router-link>
                             <router-link to="/Admin/GuestBook">
-                                <el-menu-item index="2" >
+                                <el-menu-item index="/Admin/GuestBook" >
                                     <i class="el-icon-document"></i>
                                     <span class="admin-nav-item">留言板审核</span>
                                 </el-menu-item>

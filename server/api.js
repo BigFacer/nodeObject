@@ -11,12 +11,13 @@ let sql = new setMap;
 class api {
     //封装连接池
     PoorConnection(params) {
+        params.data = params.data || '';
         return new Promise( (resolve, reject) => {
             poor.getConnection( (err ,connection) => {
                 if(err) {
                     reject(err)
                 }else{
-                    connection.query(params.sql, (err, result) => {
+                    connection.query(params.sql, params.data, (err, result) => {
                         if(err) {
                             reject(err)
                         }else{
@@ -117,6 +118,29 @@ class api {
            res.json(errorData)
        })
 
+    };
+    saveArticle(req, res, next) {
+        let params = req.query;
+        params.CreateDate = new Date().toLocaleString()
+        let sqlA = sql.saveArticle()
+        console.log(params)
+        this.PoorConnection({
+            sql: sqlA,
+            data: params
+        }).then( (result) => {
+            let successDate = {
+                isSuccess : true,
+                data: '存储成功'
+            };
+            res.json(successDate)
+        }, (err) => {
+            console.log(err)
+            let errorData = {
+                errorMessage: '网络错误',
+                isSuccess: false,
+            };
+            res.json(errorData)
+        })
     }
 }
 module.exports = api;

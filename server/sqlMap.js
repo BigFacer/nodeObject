@@ -17,6 +17,9 @@ class sqlMap {
     // 根据ID 获取token时间
     getTokenDate(ParentID) {
         return 'SELECT TokenDate FROM USER_INFORMATION  WHERE PersonID = ' +'\''+ ParentID +'\''
+    };
+    saveArticle() {
+        return 'INSERT INTO ARTICLE_CONTENT SET ?'
     }
 }
 module.exports = sqlMap;
