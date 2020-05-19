@@ -141,12 +141,15 @@ export default {
             this.ArticlesArray.PersonID  = JSON.parse(sessionStorage.getItem('userinfor') ).PersonID;
             this.ArticlesArray.PersonName  = JSON.parse(sessionStorage.getItem('userinfor') ).PersonName;
             saveArticle(this.ArticlesArray).then( (res) => {
-//                if(res.data.isSuccess){
-//                    this.$message({content: res.data})
-//                    this.ArticlesArray = {}
-//                }else{
-//                    this.$message({content: res.data.data})
-//                }
+                if(res.data.isSuccess){
+                    this.$message({
+                            message: res.data.data,
+                            type: 'success'
+                    });
+                    this.ArticlesArray = {}
+                }else{
+                    this.$message.error(res.data.errorMessage)
+                }
             })
         }
     },
