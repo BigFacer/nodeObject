@@ -15,6 +15,11 @@ export default new Vuex.Store({
     },
     setValue(state, newvalue) {
         state.userinfor = newvalue
+    },
+    clearValue(state) {
+        state.token = ''
+        state.userinfor = {}
+        state.csrf = ''
     }
   },
   actions: {

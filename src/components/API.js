@@ -19,6 +19,14 @@ export default {
           },
           dataType: 'json'
       };
+      // if(opts.url == '/upload'){
+      //     httpOptions.header =  {
+      //         'Authorization': token,
+      //         'X-Request-Width': 'XMLHttpRequest',
+      //         'Content-Type': false,
+      //
+      //     }
+      // }
       let promise = new Promise( (resovle, reject) => {
           axios.request(httpOptions).then((res) => {
               resovle(res)

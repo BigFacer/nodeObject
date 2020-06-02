@@ -141,7 +141,7 @@
         name: 'Admin',
         data () {
           return {
-              username: JSON.parse(sessionStorage.getItem('userinfor')).PersonName
+              username: JSON.parse(sessionStorage.getItem('userinfor')).PersonName || ''
           }
         },
         created() {

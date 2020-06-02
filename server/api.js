@@ -3,7 +3,9 @@ const  mysql = require('mysql');
 const dbconfig = require('./db');
 const setMap = require('./sqlMap');
 const jwt = require('./Jwt');
-const moment = require('moment')
+const moment = require('moment');
+const multiparty = require('multiparty');
+const path = require('path')
 const poor = mysql.createPool(dbconfig.mysql);
 let jwtToken = new jwt;
 const Base64 = require('js-base64').Base64
@@ -120,6 +122,32 @@ class api {
 
     };
     saveArticle(req, res, next) {
+        let form = new multiparty.Form()
+        let msg = {info:'',img:''};
+        console.log(__dirname);
+        form.uploadDir = __dirname+"/uploads";
+        form.parse(req, (err, fields, files) => {
+            console.log(req.data)
+            if(err){
+                console.log(err);
+                msg.info = '上传失败';
+                // res.send(msg);
+                console.log(msg)
+                return ;
+            }
+            console.log(fields);
+            let A = JSON.parse(fields.data);
+            console.log(A)
+            msg.img=path.join(__dirname,'/uploads/'+files.file[0].originalFilename);
+            console.log(msg.img);
+            msg.info = '上传成功';
+            msg.len = files.length;
+            // res.json({
+            //     status:200,
+            //     url: msg.img
+            // })
+            console.log(msg)
+        })
         let params = req.query;
         params.CreateDate = new Date().toLocaleString()
         let sqlA = sql.saveArticle()
