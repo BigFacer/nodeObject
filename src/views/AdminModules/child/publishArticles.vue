@@ -81,10 +81,25 @@
         </el-row>
 
         <el-row class="el-row-div">
-              <el-col :span="6" class="el-col-div">
+              <el-col :span="5" class="el-col-div">
                <el-col :span="8" class="el-col-text"><el-form-item label="文章内容:" prop="Article"></el-form-item></el-col>
               </el-col>
-              <el-col :span="6" class="el-col-div submit ">
+            <el-col :span="2" class="el-col-button">
+                <el-col :span="8" class="el-col-text"> <el-button type="primary" @click ="addTag('div')" >div</el-button></el-col>
+            </el-col>
+            <el-col :span="2" class="el-col-button">
+                <el-col :span="8" class="el-col-text"> <el-button type="success" @click = "addTag('p')">p</el-button></el-col>
+            </el-col>
+            <el-col :span="2" class="el-col-button">
+                <el-col :span="8" class="el-col-text"> <el-button type="warning" @click =  "addTag('h1')">h1</el-button></el-col>
+            </el-col>
+            <el-col :span="2" class="el-col-button">
+                <el-col :span="8" class="el-col-text"> <el-button type="info" @click = "addTag('span')">span</el-button></el-col>
+            </el-col>
+            <el-col :span="2" class="el-col-button">
+                <el-col :span="8" class="el-col-text"> <el-button type="danger" @click = "addTag('h2')">h2</el-button></el-col>
+            </el-col>
+              <el-col :span="5" class="el-col-div submit ">
                 <el-col :span="8" class="el-col-text"><el-button type="primary" round  @click=" commit('ArticlesArray')"><i class="el-icon-check"></i>提交</el-button></el-col>
               </el-col>
         </el-row>
@@ -113,13 +128,6 @@
                                     class="el-upload-list__item-preview"
                                     @click="handlePictureCardPreview(file, fileList)">
                                  <i class="el-icon-zoom-in"></i>
-                            </span>
-                            <span
-                                    v-if="!disabled"
-                                    class="el-upload-list__item-delete"
-                                    @click="handleDownload(file)"
-                            >
-                               <i class="el-icon-download"></i>
                             </span>
                             <span
                                     v-if="!disabled"
@@ -164,10 +172,13 @@
     margin-right: 7rem;
     margin-bottom: 2rem;
   }
+  .el-col-button{
+
+  }
  .el-row-div .submit{
    float: right;
    right: 0;
-   padding-right: 4rem;
+   padding-right: 6rem;
    text-align: right;
    cursor: pointer;
    font-size: 1.3rem;
@@ -201,9 +212,9 @@ export default {
       ArticlesArray: {
           SelectOne:'',
           SelectTwo:'',
-          file:'',
           SelectThree:'',
           BigTitle: '',
+          Article:'',
           Title: '',
           BackgroundText: '',
       },
@@ -251,7 +262,6 @@ export default {
                     let formData = new FormData();
                     formData.append('file', this.image[0].raw);
                     formData.append('Time','2020-05-27');
-                    console.log(this.ArticlesArray);
                     let A = JSON.stringify(this.ArticlesArray)
                     formData.append('data',A);
                     formData.get('data')
@@ -263,24 +273,25 @@ export default {
                         contentType: false,
                         data: formData,
                     }).then( (res)=> {
-                        console.log(res)
+                        if(res.data.isSuccess){
+                            this.$message.success(res.data.data);
+                            this.ArticlesArray = {};
+                            this.image = [];
+                         this.fileList = []
+                        }else{
+                            this.$message.error(res.data.errorMessage)
+                        }
+
                     })
-//                    saveArticle(this.ArticlesArray).then( (res) => {
-//                        if(res.data.isSuccess){
-//                            this.$message({
-//                                message: res.data.data,
-//                                type: 'success'
-//                            });
-//                            this.ArticlesArray = {}
-//                        }else{
-//                            this.$message.error(res.data.errorMessage)
-//                        }
-//                    })
                 } else {
                     return false;
                 }
             });
 
+        },
+        addTag (data) {
+
+            this.ArticlesArray.Article  = this.ArticlesArray.Article  + "<" +data +">" + "</" + data + ">";
         },
         handleChange(file, fileList){
             const isImage = file.raw.type == 'image/png' || file.raw.type == 'image/jpg' || file .raw.type=='image/jpeg';
@@ -310,31 +321,6 @@ export default {
         handlePictureCardPreview(file) {
             this.dialogImageUrl = file.url;
             this.dialogVisible = true;
-//            console.log(file);
-            if(file.size >1024*1024){
-                this.$message.error('图片不可超过1M');
-                return
-            }
-//            console.log(this.fileList)
-//            let formData = new FormData();
-//            formData.append('file', file.raw);
-//            formData.append('Time','2020-05-27');
-//            formData.append('name', file.name);
-//            formData.append('data', this.ArticlesArray);
-//            console.log(formData.get('data'));
-//            this.$http({
-//                url:'/api'+'/upload',
-//                method: 'POST',
-//                processData: false,
-//                contentType: false,
-//                data: formData,
-//            }).then( (res)=> {
-//                console.log(res)
-//            })
-
-        },
-        handleDownload(file) {
-            console.log(file);
         },
     },
     watch: {
