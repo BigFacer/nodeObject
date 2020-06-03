@@ -6,19 +6,29 @@ import Login from '@/views/login/login.vue'
 import Admin from '@/views/AdminModules/index.vue'
 import Articles from '@/views/AdminModules/child/publishArticles.vue'
 import GuestBook from '@/views/AdminModules/child/guestBook.vue'
+import HomePage from '@/views/webView/Home/home.vue'
 // 前台
 import Home from  '@/views/webView/index.vue'
-
 Vue.use(VueRouter);
 
   const routes: Array<RouteConfig> = [
-  // {
-  //         path: '/',
-  //         name: 'Home',
-  //         component: Home
-  // },
+      //前台
+   {
+       path: '/',
+       name: 'Home',
+       component: Home,
+       redirect:'/home',
+       children: [
+           {
+               path: 'home',
+               name: 'HomePage',
+               component: HomePage
+           }
+       ]
+  },
+      //后台
   {
-    path: '/',
+    path: '/Login',
     name: 'Login',
     component: Login
   },
@@ -27,7 +37,7 @@ Vue.use(VueRouter);
     name: 'Admin',
     component: Admin,
     redirect: '/Admin/Articles',
-      children: [
+    children: [
           {
               path: 'Articles',
               name: 'Articles',
@@ -38,8 +48,8 @@ Vue.use(VueRouter);
               name: 'GuestBook',
               component: GuestBook
           }
-      ]
-  }
+    ],
+  },
 ];
 
 const router = new VueRouter({
