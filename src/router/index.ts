@@ -9,6 +9,7 @@ import GuestBook from '@/views/AdminModules/child/guestBook.vue'
 import HomePage from '@/views/webView/Home/home.vue'
 // 前台
 import Home from  '@/views/webView/index.vue'
+import Tag from '@/views/webView/TagPage/tagPage.vue'
 Vue.use(VueRouter);
 
   const routes: Array<RouteConfig> = [
@@ -25,6 +26,11 @@ Vue.use(VueRouter);
                component: HomePage
            }
        ]
+  },
+  {
+      path:'/Tag',
+      name:'Tag',
+      component: Tag,
   },
       //后台
   {

@@ -11,9 +11,9 @@
                    <el-select v-model="ArticlesArray.SelectOne">
                      <el-option
                        v-for="item in selectOne"
-                       :key="item.ArticlId"
-                       :label="item.ArticlName"
-                       :value="item.ArticlId"
+                       :key="item.ArticleId"
+                       :label="item.ArticleName"
+                       :value="item.ArticleId"
                        class="el-input-div">
                      </el-option>
                    </el-select>
@@ -198,11 +198,11 @@
   }
 </style>
 <script>
-    import {getArticlTitle, saveArticle,upload}  from '../../../components/request'
+    import {getArticleTitle, saveArticle}  from '../../../components/request'
 export default {
   name: 'Articles',
   created(){
-      getArticlTitle({ParentID : this.$store.state.userinfor.PersonID}).then( (res)=> {
+      getArticleTitle({ParentID : this.$store.state.userinfor.PersonID}).then( (res)=> {
           this.selectOne = res.data.data;
           this.selectThree=[]
       })

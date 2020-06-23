@@ -90,4 +90,19 @@
     width: 100%;
     height: 100%;
   }
+
+  html::-webkit-scrollbar{
+    width: 0.4rem;
+  }
+ html::-webkit-scrollbar-thumb {
+        border-radius: 1rem;
+       -webkit-box-shadow: inset 0 0 0.5rem rgba(0,0,0,0.2);
+    background: rgba(0,0,0,0.2);
+
+ }
+html::-webkit-scrollbar-track {
+   -webkit-box-shadow:inset 0 0 0.5rem rgba(0,0,0,0.2);
+   border-radius: 0;
+   background: rgba(0,0,0,0.1);
+ }
 </style>

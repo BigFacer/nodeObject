@@ -100,11 +100,12 @@ class api {
     getencryDate(req, res, next) {
         res.json('OurBlog')
     };
+    //三级标签
     // 获取标题
-    getArticlTitle(req, res, next) {
+    getArticleTitle(req, res, next) {
         let ParentID = req.query.ParentID;
         ParentID = ParentID || 0;
-        let Sql =  sql.getArticlTitlSql(ParentID);
+        let Sql =  sql.getArticleTitlSql(ParentID);
        this.PoorConnection({
            sql: Sql
        }).then( (result) => {
@@ -122,6 +123,7 @@ class api {
        })
 
     };
+    //文章及图片上传
     saveArticle(req, res, next) {
         let form = new multiparty.Form()
         form.uploadDir = __dirname+"/uploads";
@@ -168,6 +170,50 @@ class api {
 
         })
 
+    };
+
+
+
+
+    //前台接口
+    // 首页标签list
+    getTagList(req, res ,next) {
+        let ParentID = req.query.ParentID ||'2000';
+        let Sql =  sql.getArticleTitlSql(ParentID);
+        this.PoorConnection({
+            sql: Sql
+        }).then( (result) => {
+            let successData = {
+                isSuccess: true,
+                data: result
+            };
+            res.json(successData)
+        },(err) => {
+            let errorData = {
+                errorMessage: '网络错误',
+                isSuccess: false,
+            };
+            res.json(errorData)
+        })
     }
+    getArticleList(req, res, next) {
+        let Sql = sql.getArticle();
+        this.PoorConnection({
+            sql: Sql
+        }).then( (result) => {
+            let successData = {
+                isSuccess: true,
+                data: result
+            };
+            res.json(successData)
+        },(err) => {
+            let errorData = {
+                errorMessage: '网络错误',
+                isSuccess: false,
+            };
+            res.json(errorData)
+        })
+    }
+
 }
 module.exports = api;
