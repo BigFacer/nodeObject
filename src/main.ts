@@ -7,6 +7,7 @@ import vuex from 'vuex'
 // import Qs from 'qs'
 import 'element-ui/lib/theme-chalk/index.css'
 import ElementUi from 'element-ui'
+// import { formaDate } from
 Vue.use(ElementUi);
 Vue.use(vuex);
 // import API from './components/API.js'
@@ -47,7 +48,10 @@ Vue.prototype.$http = axios;
 //     }
 // )
 
-
+Vue.filter('formDate', (time) => {
+    let date = new Date(time);
+    return date.getFullYear() + '-' + ((date.getMonth() +1 )>= 10 ?(date.getMonth() +1 ) : '0'+ (date.getMonth() +1 ) ) + '-' +(date.getDate()>= 10 ?date.getDate() : '0'+ date.getDate() )
+})
 
 new Vue({
   router,

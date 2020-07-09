@@ -27,7 +27,7 @@
                                </div>
                                <div class="item_text_div">
                                    <div class="background_text">{{x.BackgroundText}}</div>
-                                   <div class="time_div"><span class="el-icon-time"> {{x.CreateDate}}</span> <span class="el-icon-s-flag"> 前端知识</span></div>
+                                   <div class="time_div"><span class="el-icon-time"> {{x.CreateDate | formDate}}</span> <span class="el-icon-s-flag"> 前端知识</span></div>
                                </div>
                                <div class="line_div"></div>
                                <div class="tag_btn_div">
