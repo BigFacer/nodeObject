@@ -5,8 +5,8 @@
             <el-col :span = "8" class="my_logo"> Gentle博客</el-col>
             <el-col :span="11">
                 <el-menu :default-active="activeIndex" class="el-menu-demo" mode="horizontal" @select="handleSelect">
-                    <el-menu-item index="1"><span class="el-icon-s-home"></span><span class="nav_text">首页</span></el-menu-item>
-                    <el-menu-item index="2"><span class="el-icon-position"></span><span class="nav_text">标签</span></el-menu-item>
+                    <el-menu-item index="1"  @click="routeLink('/')"><span class="el-icon-s-home"></span><span class="nav_text" >首页</span></el-menu-item>
+                    <el-menu-item index="2"  @click="routeLink('/Tag')"><span class="el-icon-position" ></span><span class="nav_text">标签</span></el-menu-item>
                     <el-menu-item index="3" ><span class="el-icon-files"></span><span class="nav_text">分类</span></el-menu-item>
                     <el-menu-item index="4"><span class="el-icon-user"></span><span class="nav_text">关于</span></el-menu-item>
                 </el-menu>
@@ -79,6 +79,9 @@
         methods: {
             handleSelect(key, keyPath) {
                 console.log(key, keyPath);
+            },
+            routeLink(route) {
+              this.$emit('func', route)
             }
         }
     }

@@ -24,14 +24,16 @@ Vue.use(VueRouter);
                path: 'home',
                name: 'HomePage',
                component: HomePage
-           }
+           },
+           {
+               path:'/Tag',
+               name:'Tag',
+               component: Tag,
+           },
+
        ]
   },
-  {
-      path:'/Tag',
-      name:'Tag',
-      component: Tag,
-  },
+
       //后台
   {
     path: '/Login',

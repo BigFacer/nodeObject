@@ -1,6 +1,6 @@
 <template>
        <div class="index_div">
-           <hand-nav class="web_hand_nav">
+           <hand-nav class="web_hand_nav" @func="getRouteLink">
 
            </hand-nav>
            <div class="home_div">
@@ -105,6 +105,11 @@
                         clearInterval(timer)
                     }
                 }, 30)
+            },
+            getRouteLink(data) {
+               this.$router.push({
+                   path: data
+               })
             }
         }
 

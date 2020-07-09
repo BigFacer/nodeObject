@@ -18,3 +18,37 @@ div,p,span,h1,h2,h3,h4,h5,h6,ul,li,table{
     padding: 0;
     box-sizing: border-box;
 }
+.tag_title_div{
+    width: 100%;
+    height: 25rem;
+    margin-top: -5rem;
+    background: #F7F7F7;
+    margin-bottom: 2.5rem;
+    box-shadow: 0 0 7px #4444 ;
+    /*box-shadow: 2px 2px 5px #DFDFE2 ;*/
+}
+.button_div_tag button{
+   margin: 2rem 4rem;
+    box-shadow: 0 3px 5px rgba(0,0,0,.12);
+    border: none;
+}
+.button_div_tag button:hover{
+    background: linear-gradient(to right,  #9eda0c ,#608408) !important;
+}
+.little_tag{
+    width:100%;
+    height: 25rem;
+    margin-top: 5rem;
+    background: #F7F7F7;
+    margin-bottom: 2.5rem;
+    box-shadow: 0 0 7px #4444 ;
+    padding: 5rem 10rem;
+}
+.little_tag span {
+    display: inline-block;
+    cursor: pointer;
+    margin: 0 2rem;
+}
+.little_tag span:hover{
+    color: #039be5!important;
+}

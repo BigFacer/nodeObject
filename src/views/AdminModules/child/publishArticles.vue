@@ -28,9 +28,9 @@
                    <el-select v-model="ArticlesArray.SelectTwo">
                      <el-option
                        v-for="item in selectTwo"
-                       :key="item.ArticlId"
-                       :label="item.ArticlName"
-                       :value="item.ArticlId"
+                       :key="item.ArticleId"
+                       :label="item.ArticleName"
+                       :value="item.ArticleId"
                        class="el-input-div">
                      </el-option>
                    </el-select>
@@ -45,9 +45,9 @@
                    <el-select v-model="ArticlesArray.SelectThree">
                      <el-option
                        v-for="item in selectThree"
-                       :key="item.ArticlId"
-                       :label="item.ArticlName"
-                       :value="item.ArticlId"
+                       :key="item.ArticleId"
+                       :label="item.ArticleName"
+                       :value="item.ArticleId"
                        class="el-input-div">
                      </el-option>
                    </el-select>
@@ -326,7 +326,7 @@ export default {
     watch: {
          'ArticlesArray.SelectOne' (val, oldVal) {
              if(val !=oldVal) {
-                 getArticlTitle({ParentID : val}).then((res) => {
+                 getArticleTitle({ParentID : val}).then((res) => {
                     this.selectTwo = res.data.data;
                      this.selectThree = []
                     this.ArticlesArray.SelectTwo = '';
@@ -341,7 +341,7 @@ export default {
                  this.selectThree = []
                  this.ArticlesArray.SelectThree = ''
              }else if(val !=oldVal) {
-                getArticlTitle({ParentID : val}).then((res) => {
+                 getArticleTitle({ParentID : val}).then((res) => {
                     this.selectThree = res.data.data;
                     this.ArticlesArray.SelectThree = ''
                 })
