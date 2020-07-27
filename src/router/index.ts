@@ -10,6 +10,7 @@ import HomePage from '@/views/webView/Home/home.vue'
 // 前台
 import Home from  '@/views/webView/index.vue'
 import Tag from '@/views/webView/TagPage/tagPage.vue'
+import About from '@/views/webView/AboutMe/aboutMe.vue'
 Vue.use(VueRouter);
 
   const routes: Array<RouteConfig> = [
@@ -29,6 +30,11 @@ Vue.use(VueRouter);
                path:'/Tag',
                name:'Tag',
                component: Tag,
+           },
+           {
+               path:'/About',
+               name:'About',
+               component: About,
            },
 
        ]

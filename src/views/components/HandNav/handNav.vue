@@ -8,7 +8,7 @@
                     <el-menu-item index="1"  @click="routeLink('/')"><span class="el-icon-s-home"></span><span class="nav_text" >首页</span></el-menu-item>
                     <el-menu-item index="2"  @click="routeLink('/Tag')"><span class="el-icon-position" ></span><span class="nav_text">标签</span></el-menu-item>
                     <el-menu-item index="3" ><span class="el-icon-files"></span><span class="nav_text">分类</span></el-menu-item>
-                    <el-menu-item index="4"><span class="el-icon-user"></span><span class="nav_text">关于</span></el-menu-item>
+                    <el-menu-item index="4" @click="routeLink('/About')" ><span class="el-icon-user"></span><span class="nav_text">关于</span></el-menu-item>
                 </el-menu>
             </el-col>
             <el-col :span="2">
