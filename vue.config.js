@@ -7,7 +7,7 @@ module.exports = {
     publicPath: process.env.NODE_ENV === "production" ? "./" : "/",
 
     //outputDir 在npm run build 和 yarn   build时生成文件的目录名称
-    outputDir: 'mycli3',
+    outputDir: 'dist',
     //用于放置生成的静态资源(js、css、image、fonts)的，（项目打包后静态资源会放在这个文件夹下）
     assetsDir: 'assets',
     //指定生成的 index.html 的输出路径  (打包之后，改变系统默认的index.html的文件名)
