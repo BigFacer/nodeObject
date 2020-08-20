@@ -4,7 +4,6 @@ import router from './router'
 import store from './store'
 import axios from 'axios'
 import vuex from 'vuex'
-// import Qs from 'qs'
 import 'element-ui/lib/theme-chalk/index.css'
 import ElementUi from 'element-ui'
 // import { formaDate } from
