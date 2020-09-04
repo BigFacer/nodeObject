@@ -4,7 +4,7 @@ export default {
    httpTokenRequest: (opts, data) => {
       let token = sessionStorage.getItem('access_token');
       let httpOptions =  {
-          url: ':3001'+'/api' + opts.url,
+          url: '/api' + opts.url,
           params: data,
           method: opts.method,
           header: opts.method == 'get' ? {
