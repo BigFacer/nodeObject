@@ -88,10 +88,16 @@
         background: #F7F7F7;
         float: left;
         margin-bottom: 2.5rem;
+        border-radius: 2%;
+    }
+    .tag_item_div:hover{
+        box-shadow: 0 0 5px 1px rgba(0,0,0,.2) inset;
     }
     .item_img_div{
         width: 100%;
         height: 25rem;
+        border-top-left-radius: 2%;
+        border-top-right-radius: 2%;
         background-image: url("../../../assets/img/v2-2a5cf44ab9a1346d39b8ee2c23a7990a_hd.jpg");
         background-size: 100% 100%;
     }
