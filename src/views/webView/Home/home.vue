@@ -2,7 +2,7 @@
     <div class="home_page">
 
         <div class="tag_title">
-            <el-col :span ='20' :offset="2">
+            <el-col :span ='16' :offset="4">
                 <el-row>
                     <div class="tag_title_div">
                         <p class="jishu_title"><span class="el-icon-milk-tea"></span>技术栈</p>
@@ -82,8 +82,8 @@
         width: 100%;
     }
     .tag_item_div{
-        width: 32%;
-        margin-left: 1%;
+        width: 30%;
+        margin-left: 3%;
         height: 40rem;
         background: #F7F7F7;
         float: left;

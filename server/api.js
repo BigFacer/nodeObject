@@ -1,4 +1,4 @@
-// 连接数据库，各种方法实现
+// 连接数据库，各种方法实现     接口操作
 const  mysql = require('mysql');
 const dbconfig = require('./db');
 const setMap = require('./sqlMap');

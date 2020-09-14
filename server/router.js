@@ -8,7 +8,7 @@ const upload =multer({dest: __dirname + '../upload'});
 const api = require('./api');
 
 const API = new api;
-
+// 接口
 router.get('/login', (req, res, next) => {
     API.login(req, res, next)
 });
