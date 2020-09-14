@@ -13,7 +13,7 @@
                 </el-row>
                 <el-row>
                     <div class="tag_infor_div">
-                         <div class="tag_item_div" v-for="x in articleList">
+                         <div class="tag_item_div" v-for="x in articleList" @click="articleDetail(x)">
                              <div class="item_img_div">
                                  <!--<div class="title_div">{{x.Title}}</div>-->
                                  <div class="bigtitle_div">{{x.Bigtitle}}</div>
@@ -186,6 +186,17 @@ export default  {
                     this.$message.error(res.data.errorMessage)
                 }
             })
+        },
+        articleDetail(data) {
+          this.$router.push({
+              name: 'Detail',
+              query: {
+                  article: data.Article,
+                  img: data.ImgSrc,
+                  creatDate: data.CreateDate
+              }
+
+          })
         }
     }
 
