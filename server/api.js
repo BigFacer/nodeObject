@@ -178,7 +178,7 @@ class api {
     //前台接口
     // 首页标签list
     getTagList(req, res ,next) {
-        let ParentID = req.query.ParentID ||'2000';
+        let ParentID = req.query.ParentID ||'2100';
         let Sql =  sql.getArticleTitlSql(ParentID);
         this.PoorConnection({
             sql: Sql
@@ -196,8 +196,44 @@ class api {
             res.json(errorData)
         })
     }
+    //标签页list获取接口
+    getClassTagList(req, res, next){
+        let Sql = sql.getClassTagList();
+        this.PoorConnection({
+            sql: Sql
+        }).then( (result)=> {
+            let successData = {
+                isSuccess: true,
+                data: result
+            };
+            res.json(successData)
+        }), (err) => {
+            let errorData = {
+                errorMessage: '网络错误',
+                isSuccess: false
+            };
+            res.json(errorData)
+        }
+    }
+    //获取文章list
     getArticleList(req, res, next) {
-        let Sql = sql.getArticle();
+        let sqlData = {}
+        if(req.query.SelectThree) {
+            sqlData = {
+                SelectThree: req.query.SelectThree
+            }
+        }else if( req.query.SelectTwo){
+            sqlData = {
+                SelectTwo: req.query.SelectTwo
+            }
+        }else if( req.query.SelectOne){
+            sqlData = {
+                SelectOne: req.query.SelectOne
+            }
+        }else{
+            sqlData = null  
+        }
+        let Sql = sql.getArticle(sqlData);
         this.PoorConnection({
             sql: Sql
         }).then( (result) => {

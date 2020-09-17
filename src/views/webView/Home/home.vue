@@ -7,7 +7,7 @@
                     <div class="tag_title_div">
                         <p class="jishu_title"><span class="el-icon-milk-tea"></span>技术栈</p>
                         <div  class="button_div">
-                            <el-button type="primary" v-for="item in  buttonList">{{item.ArticleName}}</el-button>
+                            <el-button type="primary" v-for="item in  buttonList" @click="articleBtnClick(item.ArticleId)">{{item.ArticleName}}</el-button>
                         </div>
                     </div>
                 </el-row>
@@ -52,15 +52,7 @@
         /*background: #F7F7F7;*/
     /*}*/
 
-    .tag_title_div{
-        width: 100%;
-        height: 25rem;
-        margin-top: -5rem;
-        background: #F7F7F7;
-        margin-bottom: 2.5rem;
-        box-shadow: 0 0 7px #4444 ;
-        /*box-shadow: 2px 2px 5px #DFDFE2 ;*/
-    }
+  
     .jishu_title{
         font-size: 2.5rem;
         font-weight: bold;
@@ -73,7 +65,7 @@
         padding-left: 6rem;
     }
     .button_div .el-button+ .el-button,.button_div .el-button{
-        margin-right: 5rem;
+        margin-right: 3.5rem;
         margin-left: 0;
         margin-bottom: 3rem;
         width: 10rem;
@@ -165,9 +157,10 @@ export default  {
      },
     created() {
          this.getButtonList()
-         this.getArticle()
+         this.articleBtnClick()
     },
     methods: {
+        // 页面获取标签list
          getButtonList() {
              getTagList().then( (res) => {
                  if(res.data.isSuccess){
@@ -177,16 +170,19 @@ export default  {
                  }
              })
          },
-        getArticle() {
-            getArticleList().then( (res) => {
-                if(res.data.isSuccess){
-                    this.articleList = res.data.data
-                    console.log(res.data.data)
-                }else{
-                    this.$message.error(res.data.errorMessage)
-                }
-            })
+        //  点击标签事件
+        articleBtnClick(Id) {
+           
+             getArticleList({ SelectThree: Id   }).then( (res) => {
+                 if(res.data.isSuccess){
+                     this.articleList = res.data.data
+                 }else{
+                     this.$message.error(res.data.errorMessage)
+                 }
+             })
+
         },
+             // 查看文章详情
         articleDetail(data) {
           this.$router.push({
               name: 'Detail',

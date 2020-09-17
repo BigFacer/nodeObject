@@ -27,6 +27,9 @@ router.post('/saveArticle', (req, res, next) => {
 router.get('/getTagList', (req, res, next) => {
     API.getTagList(req, res, next)
 });
+router.get('/getClassTagList', (req, res, next) => {
+    API.getClassTagList(req, res, next)
+});
 router.get('/getArticleList', (req, res, next) => {
     API.getArticleList(req, res, next)
 });
