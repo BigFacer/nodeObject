@@ -7,7 +7,11 @@
                 <el-menu :default-active="activeIndex" class="el-menu-demo" mode="horizontal" @select="handleSelect">
                     <el-menu-item index="1"  @click="routeLink('/')"><span class="el-icon-s-home"></span><span class="nav_text" >首页</span></el-menu-item>
                     <el-menu-item index="2"  @click="routeLink('/Tag')"><span class="el-icon-position" ></span><span class="nav_text">标签</span></el-menu-item>
-                    <el-menu-item index="3" ><span class="el-icon-files"></span><span class="nav_text">分类</span></el-menu-item>
+                    <el-submenu  index="3">
+                        <template slot="title"><span class="el-icon-files"></span><span class="nav_text">分类</span></template>
+                        <el-menu-item v-for="item in navList" index=""></span><span class="nav_text">{{item.ArticleName}}</span></el-menu-item>
+                    
+                    </el-submenu >
                     <el-menu-item index="4" @click="routeLink('/About')" ><span class="el-icon-user"></span><span class="nav_text">关于</span></el-menu-item>
                 </el-menu>
             </el-col>
@@ -48,6 +52,19 @@
        padding-right:1.5rem;
        color: #fff;
    }
+  
+   .hand_div .el-menu--horizontal>.el-submenu .el-submenu__title{
+       border: none;
+       height: 100%;
+       line-height: 6.5rem;
+       padding-left: 1.5rem;
+       padding-right:1.5rem;
+       color: #fff ;
+   }
+    .hand_div .el-menu--horizontal>.el-submenu .el-submenu__title i{
+       color: #fff ;
+   }
+
    .search_civ{
        color: #fff;
        line-height: 6.5rem;
@@ -59,29 +76,54 @@
         font-size: 1.4rem;
         font-weight: bold;
     }
-    .hand_div .el-menu--horizontal>.el-menu-item:not(.is-disabled):focus,.hand_div .el-menu--horizontal>.el-menu-item:not(.is-disabled):hover{
+     .hand_div .el-menu--horizontal>.el-submenu>template span{
+        margin-right: 0;
+        display: inline-block;
+        font-size: 1.4rem;
+        font-weight: bold;
+    }
+    .hand_div .el-menu--horizontal>.el-submenu .el-submenu__title:not(.is-disabled):focus,.hand_div .el-menu--horizontal>.el-submenu .el-submenu__title:not(.is-disabled):hover{
         color: #fff;
         background: #1A96C4;
     }
-  .hand_div .el-menu--horizontal>.el-menu-item.is-active ,  .hand_div .el-menu--horizontal>.el-menu-item.is-active span{
+     .hand_div .el-menu--horizontal>.el-menu-item:not(.is-disabled):focus,.hand_div .el-menu--horizontal>.el-menu-item:not(.is-disabled):hover{
+        color: #fff;
+        background: #1A96C4;
+    }
+  .hand_div .el-menu--horizontal>.el-menu-item.is-active ,  .hand_div .el-menu--horizontal>.el-menu-item.is-active span {
         border: none;
         color: #fff;
     }
-
 </style>
 <script>
+ import {getTagList} from '../../../components/request'
     export  default {
         data() {
             return {
                 activeIndex: '1',
+                navList: []
             }
         },
+        created(){
+             this.getNavList()
+        },
         methods: {
+           //点击nav获取当前元素
             handleSelect(key, keyPath) {
                 console.log(key, keyPath);
             },
+            //路由切换
             routeLink(route) {
               this.$emit('func', route)
+            },
+            getNavList() {
+                 getTagList({ParentID: '0'}).then( (res)=>{
+                   if(res.data.isSuccess){
+                       this.navList = res.data.data
+                   }else{
+                       this.$$message.error(res.data.errorMessage)
+                   }
+                })
             }
         }
     }

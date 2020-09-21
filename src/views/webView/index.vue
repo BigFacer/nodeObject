@@ -69,6 +69,8 @@
 <script>
     import  handNav from '../components/HandNav/handNav.vue'
     import footNav from  '../components/FootNav/footNav.vue'
+    import {getTagList} from '../../components/request'
+  import { Form } from 'element-ui'
     export default {
         components: {
             'hand-nav': handNav,
@@ -80,9 +82,11 @@
             }
         },
         mounted() {
+            this.getNavList()
           window.addEventListener("scroll", this.handleScroll);
         },
         methods: {
+            // 到顶部按钮事件
             handleScroll() {
                 let scrollTop = window.pageYOffset;
                 if (scrollTop != undefined && scrollTop > 100) {
@@ -110,6 +114,11 @@
                this.$router.push({
                    path: data
                })
+            },
+            getNavList() {
+                getTagList({ParentID: '0'}).then( (res)=>{
+                    console.log(res)
+                })
             }
         }
 

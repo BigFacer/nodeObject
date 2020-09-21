@@ -61,7 +61,7 @@
         margin-bottom: 2rem;
     }
     .button_div{
-        text-align: left;
+        text-align: center;
         padding-left: 6rem;
     }
     .button_div .el-button+ .el-button,.button_div .el-button{
