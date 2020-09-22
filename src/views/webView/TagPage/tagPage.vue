@@ -55,7 +55,7 @@
        },
         created(){
            this.getButtonList();
-            this.clickTag()
+            // this.clickTag()
         },
         methods: {
             //获取上部分标签

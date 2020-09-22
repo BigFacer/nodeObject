@@ -7,9 +7,9 @@
                 <el-menu :default-active="activeIndex" class="el-menu-demo" mode="horizontal" @select="handleSelect">
                     <el-menu-item index="1"  @click="routeLink('/')"><span class="el-icon-s-home"></span><span class="nav_text" >首页</span></el-menu-item>
                     <el-menu-item index="2"  @click="routeLink('/Tag')"><span class="el-icon-position" ></span><span class="nav_text">标签</span></el-menu-item>
-                    <el-submenu  index="3">
-                        <template slot="title"><span class="el-icon-files"></span><span class="nav_text">分类</span></template>
-                        <el-menu-item v-for="item in navList" index=""></span><span class="nav_text">{{item.ArticleName}}</span></el-menu-item>
+                    <el-submenu  index="3"  @click="routeLink('/ClassTag')">
+                        <template slot="title" ><span class="el-icon-files"></span><span class="nav_text">分类</span></template>
+                        <el-menu-item v-for="item in navList" index=""  @click="routeLink('/ClassTag')"></span><span class="nav_text">{{item.ArticleName}}</span></el-menu-item>
                     
                     </el-submenu >
                     <el-menu-item index="4" @click="routeLink('/About')" ><span class="el-icon-user"></span><span class="nav_text">关于</span></el-menu-item>
@@ -94,6 +94,25 @@
         border: none;
         color: #fff;
     }
+
+   .el-menu--horizontal .el-menu--popup-bottom-start{
+       border-radius: 0.8rem;
+       text-align: center;
+       margin-top: 0;
+       min-width: 16rem;
+   }
+   .web_hand_nav .el-menu--horizontal>.el-submenu.is-active .el-submenu__title,    .web_hand_nav .el-menu--horizontal>.el-submenu.is-active .el-submenu__title span {
+       border: none;
+       color: #fff;
+   }
+  .web_hand_nav .el-menu--horizontal>.el-submenu:focus .el-submenu__title, .el-menu--horizontal>.el-submenu:hover .el-submenu__title{
+        border: none;
+       color: #fff;
+   }
+   .el-menu--horizontal .is-active span{
+       border: none;
+       color: #303133;
+   }
 </style>
 <script>
  import {getTagList} from '../../../components/request'
@@ -114,14 +133,16 @@
             },
             //路由切换
             routeLink(route) {
+                console.log(route)
               this.$emit('func', route)
             },
             getNavList() {
                  getTagList({ParentID: '0'}).then( (res)=>{
                    if(res.data.isSuccess){
-                       this.navList = res.data.data
+                       this.navList = res.data.data;
+                       this.$store.commit('setNavList', res.data.data)
                    }else{
-                       this.$$message.error(res.data.errorMessage)
+                       this.$message.error(res.data.errorMessage)
                    }
                 })
             }
