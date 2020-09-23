@@ -1,6 +1,6 @@
 <template>
        <div class="index_div">
-           <hand-nav class="web_hand_nav" @func="getRouteLink">
+           <hand-nav class="web_hand_nav" @func="getRouteLink(arguments)">
 
            </hand-nav>
            <div class="home_div">
@@ -110,9 +110,15 @@
                     }
                 }, 30)
             },
-            getRouteLink(data) {
+            getRouteLink(value) {
+                console.log(value[0]);
+                console.log(value[1]);
+                
                this.$router.push({
-                   path: data
+                   path: value[0],
+                   query: {
+                       id: value[1]
+                   }
                })
             },
             getNavList() {

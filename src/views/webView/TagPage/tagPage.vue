@@ -13,7 +13,7 @@
                <el-row>
                   <el-row class="little_tag" v-show="tagShow">
                       <div>
-                          <span v-for="item in  buttonList" :style="changeText(item)"> {{item.ArticleName}}</span>
+                          <span v-for="item in  buttonList" :style="changeText(item)" @click="clickTag(item.ArticleId)"> {{item.ArticleName}}</span>
                           <!--<span v-for="item in  buttonList" :style="changeText(item)"> {{item.ArticleName}}</span>-->
                       </div>
 
