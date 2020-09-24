@@ -61,17 +61,18 @@ export default {
   data() {
       return {
           navList: this.$store.state.navList,
-          articleId: '',
+          articleId: this.$route.query.id,
           articleList: [],
           
         
       }
   },
-  mounted(){
+  created(){
       this.articleBtnClick(this.articleId)
   },
   methods: {
      articleBtnClick(Id) {
+            this.articleId = Id
              getArticleList({ SelectOne: Id}).then( (res) => {
                  if(res.data.isSuccess){
                      this.articleList = res.data.data
@@ -81,8 +82,7 @@ export default {
                  }
              })
 
-        },
-        
+        } 
   }
 }
 

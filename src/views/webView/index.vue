@@ -1,6 +1,6 @@
 <template>
        <div class="index_div">
-           <hand-nav class="web_hand_nav" @func="getRouteLink(arguments)">
+           <hand-nav class="web_hand_nav" @func="getRouteLink">
 
            </hand-nav>
            <div class="home_div">
@@ -111,9 +111,8 @@
                 }, 30)
             },
             getRouteLink(value) {
-                console.log(value[0]);
-                console.log(value[1]);
-                
+             
+            //  console.log( this.$refs['child'])
                this.$router.push({
                    path: value[0],
                    query: {

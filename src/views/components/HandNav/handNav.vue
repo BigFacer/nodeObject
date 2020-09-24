@@ -7,9 +7,9 @@
                 <el-menu :default-active="activeIndex" class="el-menu-demo" mode="horizontal" @select="handleSelect">
                     <el-menu-item index="1"  @click="routeLink('/')"><span class="el-icon-s-home"></span><span class="nav_text" >首页</span></el-menu-item>
                     <el-menu-item index="2"  @click="routeLink('/Tag')"><span class="el-icon-position" ></span><span class="nav_text">标签</span></el-menu-item>
-                    <el-submenu  index="3"  @click="routeLink('/ClassTag')">
+                    <el-submenu  index="3"  @click.native.prevent="routeLink('/ClassTag')">
                         <template slot="title" ><span class="el-icon-files"></span><span class="nav_text">分类</span></template>
-                        <el-menu-item v-for="item in navList" index=""  @click="routeLink('/ClassTag', item.ArticleId)"></span><span class="nav_text">{{item.ArticleName}}</span></el-menu-item>
+                        <el-menu-item v-for="item in navList" index=""  @click.native.prevent="routeLink('/ClassTag', item.ArticleId)"></span><span class="nav_text">{{item.ArticleName}}</span></el-menu-item>
                     
                     </el-submenu >
                     <el-menu-item index="4" @click="routeLink('/About')" ><span class="el-icon-user"></span><span class="nav_text">关于</span></el-menu-item>
@@ -129,12 +129,15 @@
         methods: {
            //点击nav获取当前元素
             handleSelect(key, keyPath) {
-                console.log(key, keyPath);
+                // console.log(key, keyPath);
             },
             //路由切换
             routeLink(route, id) {
                id = id || '0'; 
-              this.$emit('func', route, id)
+              let pushRoute = []
+              pushRoute.push(route);
+              pushRoute.push(id) 
+              this.$emit('func', pushRoute)
             },
             getNavList() {
                  getTagList({ParentID: '0'}).then( (res)=>{
