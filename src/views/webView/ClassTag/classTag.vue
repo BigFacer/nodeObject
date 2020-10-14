@@ -49,11 +49,13 @@
         width: 10rem;
         
 }
-.el-radio-group .el-radio-button__inner{
+.el-radio-button__inner, .el-radio-group .el-radio-button .el-radio-button__inner{
   border-radius:0.5rem ;
   color: red;
 }
-
+.el-radio-button:focus:not(.is-focus):not(:active):not(.is-disabled) {
+    box-shadow: none;
+}
 </style> 
 <script>
  import {getArticleList} from '../../../components/request'
