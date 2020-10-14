@@ -49,31 +49,37 @@
         width: 10rem;
         
 }
-.el-radio-button__inner, .el-radio-group .el-radio-button .el-radio-button__inner{
-  border-radius:0.5rem ;
-  color: red;
+ .button_div /deep/ .el-radio-button:first-child .el-radio-button__inner{
+  border-radius: 0;
+  
+}
+ .button_div /deep/.el-radio-button__inner{
+  border-radius:0.5rem;
+  border-left:1px solid #DCDFE6;
 }
 .el-radio-button:focus:not(.is-focus):not(:active):not(.is-disabled) {
     box-shadow: none;
 }
+.button_div /deep/ .el-radio-button:first-child .el-radio-button__inner,.button_div /deep/ .el-radio-button:last-child .el-radio-button__inner{
+    border-radius:0.5rem;
+}
 </style> 
 <script>
- import {getArticleList} from '../../../components/request'
+ import {getArticleList, getTagList} from '../../../components/request'
 export default {
   data() {
       return {
-          navList: this.$store.state.navList,
           articleId: this.$route.query.id,
           articleList: [],
-          
-        
+          navList: []
       }
   },
   created(){
-      this.articleBtnClick(this.articleId)
+      this.articleBtnClick(this.articleId),
+      this.getNavList()
   },
   methods: {
-     articleBtnClick(Id) {
+     articleBtnClick(Id) {//获取文章
             this.articleId = Id
              getArticleList({ SelectOne: Id}).then( (res) => {
                  if(res.data.isSuccess){
@@ -84,7 +90,28 @@ export default {
                  }
              })
 
-        } 
+    },
+     getNavList() {//获取标签
+                 getTagList({ParentID: '0'}).then( (res)=>{
+                   if(res.data.isSuccess){
+                       this.navList = res.data.data;
+                       this.$store.commit('setNavList', res.data.data)
+                   }else{
+                       this.$message.error(res.data.errorMessage)
+                   }
+                })
+     },            
+    articleDetail(data) {// 查看文章详情
+          this.$router.push({
+              name: 'Detail',
+              query: {
+                  article: data.Article,
+                  img: data.ImgSrc,
+                  creatDate: data.CreateDate
+              }
+
+          })
+    }  
   }
 }
 

@@ -20,7 +20,7 @@
                   </el-row>
                    <el-row class="little_tag_div" v-show="!tagShow">
                        <div class="tag_infor_div">
-                           <div class="tag_item_div" v-for="x in articleList">
+                           <div class="tag_item_div" v-for="x in articleList"  @click="articleDetail(x)">
                                <div class="item_img_div">
                                    <!--<div class="title_div">{{x.Title}}</div>-->
                                    <div class="bigtitle_div">{{x.Bigtitle}}</div>
@@ -98,6 +98,17 @@
                     }
                 })
             },
+            articleDetail(data) {// 查看文章详情
+                this.$router.push({
+                  name: 'Detail',
+                    query: {
+                        article: data.Article,
+                        img: data.ImgSrc,
+                        creatDate: data.CreateDate
+                    }
+
+                })
+            }  
 //            获取标签对应列表
             // getArticle() {
             //     console.log(this.tagShow)
