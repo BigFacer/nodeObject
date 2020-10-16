@@ -8,7 +8,7 @@ const upload =multer({dest: __dirname + '../upload'});
 const api = require('./api');
 
 const API = new api;
-
+// 接口
 router.get('/login', (req, res, next) => {
     API.login(req, res, next)
 });
@@ -26,6 +26,9 @@ router.post('/saveArticle', (req, res, next) => {
 });
 router.get('/getTagList', (req, res, next) => {
     API.getTagList(req, res, next)
+});
+router.get('/getClassTagList', (req, res, next) => {
+    API.getClassTagList(req, res, next)
 });
 router.get('/getArticleList', (req, res, next) => {
     API.getArticleList(req, res, next)

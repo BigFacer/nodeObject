@@ -12,6 +12,7 @@ import Home from  '@/views/webView/index.vue'
 import Tag from '@/views/webView/TagPage/tagPage.vue'
 import About from '@/views/webView/AboutMe/aboutMe.vue'
 import Detail from '@/views/webView/PageDetail/pageDetail.vue'
+import ClassTag from '@/views/webView/ClassTag/classTag.vue'
 Vue.use(VueRouter);
 
   const routes: Array<RouteConfig> = [
@@ -31,6 +32,11 @@ Vue.use(VueRouter);
                path: '/Tag',
                name: 'Tag',
                component: Tag,
+           },
+           {
+            path: '/ClassTag',
+            name: 'ClassTag',
+            component: ClassTag,
            },
            {
                path: '/About',

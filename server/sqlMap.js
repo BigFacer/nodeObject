@@ -10,10 +10,18 @@ class sqlMap {
     setToken(ID, token, date) {
         return 'UPDATE USER_INFORMATION SET Token = ' +'\''+ token +'\''+ '\,'+'TokenDate = '+'\''+ date +'\''+'WHERE PersonID = '+ ID
     };
-    // 获取文章标题
+    // 获取同类文章标题
     getArticleTitlSql(ParentID) {
         return 'SELECT * FROM `ARTICLE_LABEL_FIRST` WHERE ParentId = ' +'\''+ ParentID +'\''
     };
+    //首页获取技术类标签
+    getSArticleTitleSql(ArticleType){
+        return 'SELECT * FROM `ARTICLE_LABEL_FIRST` WHERE ArticleType =' + '\''+ ArticleType +'\''
+    };
+    // 获取标签页标签
+    getClassTagList() {
+        return 'SELECT * FROM `ARTICLE_LABEL_FIRST` WHERE ArticleType = '+'\'' +'2' +'\'' +'AND ParentId >' +'\''+'2000'+'\'' 
+    }
     // 根据ID 获取token时间
     getTokenDate(ParentID) {
         return 'SELECT TokenDate FROM USER_INFORMATION  WHERE PersonID = ' +'\''+ ParentID +'\''
@@ -22,8 +30,12 @@ class sqlMap {
         return 'INSERT INTO ARTICLE_CONTENT SET ?'
     }
     //查询文章
-    getArticle(){
-        return 'SELECT *  FROM ARTICLE_CONTENT WHERE SelectOne = \'1000\''
+    getArticle(sqlData){
+        let a = 'SELECT *  FROM ARTICLE_CONTENT  '
+        if(sqlData) {
+            a = a +'WHERE '+ Object.keys(sqlData) +'=' + Object.values(sqlData)
+        }
+        return a
     }
 }
 module.exports = sqlMap;

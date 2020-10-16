@@ -6,21 +6,21 @@
                    <div class="tag_title_div">
                        <p class="jishu_title"><span class="el-icon-paperclip"></span>文章标签</p>
                        <div  class="button_div_tag">
-                           <el-button type="danger" v-for="item in  buttonList" :style="randomRgb(item)" @click="clickTag">{{item.ArticleName}}</el-button>
+                           <el-button type="danger" v-for="item in  buttonList" :style="randomRgb(item)" @click="clickTag(item.ArticleId)">{{item.ArticleName}}</el-button>
                        </div>
                    </div>
                </el-row>
                <el-row>
                   <el-row class="little_tag" v-show="tagShow">
                       <div>
-                          <span v-for="item in  buttonList" :style="changeText(item)"> {{item.ArticleName}}</span>
+                          <span v-for="item in  buttonList" :style="changeText(item)" @click="clickTag(item.ArticleId)"> {{item.ArticleName}}</span>
                           <!--<span v-for="item in  buttonList" :style="changeText(item)"> {{item.ArticleName}}</span>-->
                       </div>
 
                   </el-row>
                    <el-row class="little_tag_div" v-show="!tagShow">
                        <div class="tag_infor_div">
-                           <div class="tag_item_div" v-for="x in articleList">
+                           <div class="tag_item_div" v-for="x in articleList"  @click="articleDetail(x)">
                                <div class="item_img_div">
                                    <!--<div class="title_div">{{x.Title}}</div>-->
                                    <div class="bigtitle_div">{{x.Bigtitle}}</div>
@@ -44,7 +44,7 @@
 
 </template>
 <script>
-    import {getTagList, getArticleList} from '../../../components/request'
+    import {getClassTagList, getArticleList} from '../../../components/request'
     export default {
        data() {
            return {
@@ -55,12 +55,12 @@
        },
         created(){
            this.getButtonList();
-            this.getArticle()
+            // this.clickTag()
         },
         methods: {
             //获取上部分标签
             getButtonList() {
-                getTagList().then( (res) => {
+                getClassTagList().then( (res) => {
                     if(res.data.isSuccess){
                         this.buttonList = res.data.data
                     }else{
@@ -88,21 +88,39 @@
                     fontSize: fontSizt + 'px'
                 }
             },
-            clickTag(){
+            clickTag(data){
                 this.tagShow = false
-            },
-//            获取标签对应列表
-            getArticle() {
-                console.log(this.tagShow)
-                getArticleList().then( (res) => {
+                getArticleList({SelectThree: data}).then( (res)=> {
                     if(res.data.isSuccess){
                         this.articleList = res.data.data
-                        console.log(res.data.data)
                     }else{
                         this.$message.error(res.data.errorMessage)
                     }
                 })
-            }
+            },
+            articleDetail(data) {// 查看文章详情
+                this.$router.push({
+                  name: 'Detail',
+                    query: {
+                        article: data.Article,
+                        img: data.ImgSrc,
+                        creatDate: data.CreateDate
+                    }
+
+                })
+            }  
+//            获取标签对应列表
+            // getArticle() {
+            //     console.log(this.tagShow)
+            //     getArticleList().then( (res) => {
+            //         if(res.data.isSuccess){
+            //             this.articleList = res.data.data
+            //             console.log(res.data.data)
+            //         }else{
+            //             this.$message.error(res.data.errorMessage)
+            //         }
+            //     })
+            // }
         }
     }
 </script>

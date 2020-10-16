@@ -7,7 +7,8 @@ export default new Vuex.Store({
   state: {
       token:'',
       userinfor:{},
-      csrf: ''
+      csrf: '',
+      navList: []
   },
   mutations: {
     setToken(state, newValue) {
@@ -15,6 +16,9 @@ export default new Vuex.Store({
     },
     setValue(state, newvalue) {
         state.userinfor = newvalue
+    },
+    setNavList(state, newValue) {
+      state.navList = newValue
     },
     clearValue(state) {
         state.token = ''
