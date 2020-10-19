@@ -66,6 +66,7 @@
 </style> 
 <script>
  import {getArticleList, getTagList} from '../../../components/request'
+ import bus from '../../../components/middleChart'
 export default {
   data() {
       return {
@@ -77,6 +78,12 @@ export default {
   created(){
       this.articleBtnClick(this.articleId),
       this.getNavList()
+  },
+  mounted() {
+      bus.$on('changeNav', (data) => {
+          this.articleBtnClick(data)
+      })
+
   },
   methods: {
      articleBtnClick(Id) {//获取文章

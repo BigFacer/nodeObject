@@ -116,6 +116,7 @@
 </style>
 <script>
  import {getTagList} from '../../../components/request'
+ import bus from '../../../components/middleChart'
     export  default {
         data() {
             return {
@@ -137,7 +138,9 @@
               let pushRoute = []
               pushRoute.push(route);
               pushRoute.push(id) 
-              this.$emit('func', pushRoute)
+              this.$emit('func', pushRoute);
+              bus.$emit('changeNav', id)
+
             },
             getNavList() {
                  getTagList({ParentID: '0'}).then( (res)=>{
