@@ -2,7 +2,7 @@
 
     <div class="hand_div">
         <el-row>
-            <el-col :span = "8" class="my_logo"> Gentle博客</el-col>
+            <el-col :span = "8" class="my_logo"> Gentle</el-col>
             <el-col :span="11">
                 <el-menu :default-active="activeIndex" class="el-menu-demo" mode="horizontal" @select="handleSelect">
                     <el-menu-item index="1"  @click="routeLink('/')"><span class="el-icon-s-home"></span><span class="nav_text" >首页</span></el-menu-item>

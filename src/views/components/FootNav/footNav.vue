@@ -1,7 +1,7 @@
 <template>
     <div class="foot_div">
             <div class="f_div">Copyright © 2018 - 2020 WENYUAN All Rights Reserved.</div>
-           <div @click='goGX'>备案号:豫ICP备20024285号</div>
+           <div @click='goGX'>备案号:豫ICP备20024285号-1</div>
     </div>
 </template>
 <style>
