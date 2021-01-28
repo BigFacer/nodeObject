@@ -17,6 +17,7 @@
                              <div class="item_img_div">
                                  <!--<div class="title_div">{{x.Title}}</div>-->
                                  <div class="bigtitle_div">{{x.Bigtitle}}</div>
+                                 <!-- <img src="http://yydn.top/assets/img/v2-2a5cf44ab9a1346d39b8ee2c23a7990a_hd.jpg" alt=""> -->
                              </div>
                              <div class="item_text_div">
                                  <div class="background_text">{{x.BackgroundText}}</div>

@@ -6,7 +6,9 @@ const jwt = require('./jwt');
 const moment = require('moment');
 const multiparty = require('multiparty');
 const path = require('path')
-const poor = mysql.createPool(dbconfig.mysql);
+const poor = mysql.createPool(dbconfig.mysql,{
+    multipleStatements: true
+});
 let jwtToken = new jwt;
 const Base64 = require('js-base64').Base64;
 const  fs = require('fs');
@@ -56,6 +58,7 @@ class api {
                 }
                 res.json(successData);
         },(err) => {
+            console.log(err)
             let errorData = {
                 errorMessage: '网络错误',
                 isSuccess: false,
