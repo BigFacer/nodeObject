@@ -19,7 +19,7 @@
     "moment": "^2.24.0",
     "mysql": "^2.18.1",
     "node-jsencrypt": "^1.0.0",
-    "node-sass": "^4.13.1",
+    "node-sass": "^7.0.0",
     "qs": "^6.9.4",
     "vue": "^2.6.11",
     "vue-class-component": "^7.2.3",
