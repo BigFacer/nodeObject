@@ -15,7 +15,7 @@
     "express": "^4.17.1",
     "js-base64": "^2.5.2",
     "jsencrypt": "^3.0.0-rc.1",
-    "jsonwebtoken": "^8.5.1",
+    "jsonwebtoken": "^9.0.0",
     "moment": "^2.24.0",
     "mysql": "^2.18.1",
     "node-jsencrypt": "^1.0.0",
